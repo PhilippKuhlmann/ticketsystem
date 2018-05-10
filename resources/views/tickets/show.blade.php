@@ -13,7 +13,7 @@
                     <div class="row">
                         <input type="button" class="btn btn-primary" value="Edit" onclick="location.href = '/tickets/{{$ticket->id}}/edit';">
 
-
+                        
                         <form action="/tickets/{{$ticket->id}}" method="post">
                             <input name="_method" type="hidden" value="delete">
                             {{ csrf_field() }}
