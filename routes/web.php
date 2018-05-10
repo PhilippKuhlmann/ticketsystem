@@ -14,6 +14,8 @@
 Route::get('/', 'TicketController@index');
 
 Auth::routes();
+Route::get('/verify/{token}', 'VerifyController@verify');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/tickets', 'TicketController@index');

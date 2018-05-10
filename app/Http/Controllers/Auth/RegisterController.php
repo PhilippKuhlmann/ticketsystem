@@ -92,9 +92,12 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'verifyToken' => str_random(50),
         ]);
 
         $user->assignRole('user');
+
+        $user->sendVerificationEmail();
 
         return $user;
     }

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Notifications\VerifyEmail;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -19,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstName', 'lastName', 'username', 'email', 'password',
+        'firstName', 'lastName', 'username', 'email', 'password', 'verifyToken',
     ];
 
     /**
@@ -30,4 +32,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function verified()
+    {
+        return $this->verifyToken === null;
+    }
+
+    public function sendVerificationEmail()
+    {
+        $this->notify(new VerifyEmail($this));
+    }
 }
