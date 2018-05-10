@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'TicketController@index');
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/tickets', 'TicketController@index');
 Route::post('/tickets', 'TicketController@store')->middleware('permission:create ticket');
@@ -22,8 +23,3 @@ Route::get('/tickets/{ticket}', 'TicketController@show');
 Route::put('/tickets/{ticket}', 'TicketController@update')->middleware('permission:edit ticket');
 Route::delete('/tickets/{ticket}', 'TicketController@destroy')->middleware('permission:delete ticket');
 Route::get('/tickets/{ticket}/edit', 'TicketController@edit');
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
