@@ -39,8 +39,10 @@ class DatabaseSeeder extends Seeder
         $role->givePermissionTo(Permission::all());
 
         $user = User::create([
-            'name' => 'root',
+            'firstName' => 'Super',
+            'lastName' => 'Admin',
             'username' => 'root',
+            'email' => 'root@test.de',
             'password' => Hash::make('password')
         ]);
 

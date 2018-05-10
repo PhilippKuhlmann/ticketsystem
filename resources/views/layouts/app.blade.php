@@ -36,6 +36,9 @@
                     <ul class="navbar-nav mr-auto">
                         <li><a class="nav-link" href="/tickets">Tickets</a></li>
                         <li><a class="nav-link" href="/tickets/create">Ticket erstellen</a></li>
+                        @role('root')
+                            <li><a class="nav-link" href="/register">User anlegen</a></li>
+                        @endrole
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -47,7 +50,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->firstName . ' ' . Auth::user()->lastName }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
