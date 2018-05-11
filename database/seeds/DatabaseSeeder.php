@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Permission;
 
 use App\User;
 use App\Customer;
+use App\Employee;
 
 
 class DatabaseSeeder extends Seeder
@@ -85,6 +86,14 @@ class DatabaseSeeder extends Seeder
         $customer = Customer::create([
             'name' => 'FirmenName XYZ',
             'email' => 'firma@test.de',
+        ]);
+
+        // create basic employee
+        $employee = Employee::create([
+            'customer_id' => $customer->id,
+            'firstName' => 'Max',
+            'lastName' => 'Mustermann',
+            'email' => 'm.mustermann@test.de',
         ]);
     }
 }

@@ -30,4 +30,6 @@ Route::get('/tickets/{ticket}/edit', 'TicketController@edit')->middleware('permi
 Route::get('/customers', 'CustomerController@index')->middleware('auth');
 Route::get('/customer/{customer}', 'CustomerController@show')->middleware('auth');
 
+Route::get('/employee/{employee}', 'EmployeeController@show')->middleware('auth');
+
 Route::get('/admin', 'AdminController@dashboard')->middleware('role:root|admin');

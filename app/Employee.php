@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class Employee extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,19 +12,19 @@ class Customer extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'street', 'zip', 'city', 'email', 'phone', 'fax',
+        'customer_id', 'firstName', 'lastName', 'email',
     ];
 
     /**
      *  Relationships
      */
+     public function customer()
+    {
+        return $this->belongsTo('App\Customer');
+    }
+
     public function tickets()
     {
         return $this->hasMany('App\Ticket');
-    }
-
-    public function employees()
-    {
-        return $this->hasMany('App\Employee');
     }
 }

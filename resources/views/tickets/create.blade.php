@@ -21,6 +21,16 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="employee">Ansprechpartner</label>
+                            <select class="form-control" id="employee" name="employee_id">
+                                <option value="">Select please ...</option>
+                                @foreach ($employees as $employee)
+                                    <option value="{{$employee->id}}">{{$employee->firstName . ' ' . $employee->lastName}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label for="title">Betreff</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="Betreff">
                         </div>

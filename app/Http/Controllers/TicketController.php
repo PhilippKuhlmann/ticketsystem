@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Ticket;
 use App\Customer;
+use App\Employee;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -29,7 +30,8 @@ class TicketController extends Controller
     {
         $users = User::role('user')->get();
         $customers = Customer::all();
-        return view('tickets.create', compact('users', 'customers'));
+        $employees = Employee::all();
+        return view('tickets.create', compact('users', 'customers', 'employees'));
     }
 
     /**
@@ -46,6 +48,7 @@ class TicketController extends Controller
             'creator_id' => auth()->user()->id,
             'editor_id' => $request->editor_id,
             'customer_id' => $request->customer_id,
+            'employee_id' => $request->employee_id,
         ]);
 
         return redirect('/');

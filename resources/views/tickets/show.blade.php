@@ -15,6 +15,10 @@
                     <br>
                     Customer:{{$ticket->customer->name}}<br>
                     Customer:{{$ticket->customer->email}}
+
+                    <br>
+                    Ansprechpartner:{{$ticket->employee->firstName}}<br>
+                    Ansprechpartner:{{$ticket->employee->email}}
                 </div>
                 <div class="card-footer">
                     <div class="row">
