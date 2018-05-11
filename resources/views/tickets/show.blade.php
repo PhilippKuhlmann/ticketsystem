@@ -13,11 +13,11 @@
                     <br>
                     Crator:{{$ticket->creator->firstName . ' ' . $ticket->creator->lastName}}
                     <br>
-                    Customer:{{$ticket->customer->name}}<br>
+                    Customer:<a href="/customer/{{$ticket->customer->id}}">{{$ticket->customer->name}}</a><br>
                     Customer:{{$ticket->customer->email}}
 
                     <br>
-                    Ansprechpartner:{{$ticket->employee->firstName}}<br>
+                    Ansprechpartner:<a href="/employee/{{$ticket->employee->id}}">{{$ticket->employee->firstName}}</a><br>
                     Ansprechpartner:{{$ticket->employee->email}}
                 </div>
                 <div class="card-footer">
