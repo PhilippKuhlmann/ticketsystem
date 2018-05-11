@@ -26,7 +26,6 @@ Route::put('/tickets/{ticket}', 'TicketController@update')->middleware('permissi
 Route::delete('/tickets/{ticket}', 'TicketController@destroy')->middleware('permission:delete ticket');
 Route::get('/tickets/{ticket}/edit', 'TicketController@edit')->middleware('permission:edit ticket');
 
-
 Route::get('/customers', 'CustomerController@index')->middleware('auth');
 Route::get('/customer/{customer}', 'CustomerController@show')->middleware('auth');
 

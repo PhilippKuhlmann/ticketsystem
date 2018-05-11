@@ -16,7 +16,7 @@ class Customer extends Model
     ];
 
     /**
-     *  Relationships
+     *  Relationships.
      */
     public function tickets()
     {

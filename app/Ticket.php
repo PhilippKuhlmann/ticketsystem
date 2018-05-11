@@ -16,9 +16,9 @@ class Ticket extends Model
     ];
 
     /**
-     *  Relationships
+     *  Relationships.
      */
-     public function creator()
+    public function creator()
     {
         return $this->belongsTo('App\User', 'creator_id');
     }

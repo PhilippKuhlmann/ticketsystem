@@ -3,16 +3,13 @@
 namespace App;
 
 use App\Notifications\VerifyEmail;
-
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use Notifiable;
-
     use HasRoles;
 
     /**
@@ -34,19 +31,17 @@ class User extends Authenticatable
     ];
 
     /**
-     *  Relationships
+     *  Relationships.
      */
-     public function createdTickets()
-     {
-         return $this->hasMany('App\Ticket', 'crator_id');
-     }
+    public function createdTickets()
+    {
+        return $this->hasMany('App\Ticket', 'crator_id');
+    }
 
-     public function editTickets()
-     {
-         return $this->hasMany('App\Ticket', 'editor_id');
-     }
-
-
+    public function editTickets()
+    {
+        return $this->hasMany('App\Ticket', 'editor_id');
+    }
 
     public function verified()
     {
