@@ -18,10 +18,16 @@ Route::get('/verify/{token}', 'VerifyController@verify')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/tickets', 'TicketController@index')->middleware('role:root');
+Route::get('/tickets', 'TicketController@index')->middleware('permission:see all tickets');
 Route::post('/tickets', 'TicketController@store')->middleware('permission:create ticket');
-Route::get('/tickets/create', 'TicketController@create')->middleware('auth');
+Route::get('/tickets/create', 'TicketController@create')->middleware('permission:create ticket');
 Route::get('/tickets/{ticket}', 'TicketController@show')->middleware('auth');
 Route::put('/tickets/{ticket}', 'TicketController@update')->middleware('permission:edit ticket');
 Route::delete('/tickets/{ticket}', 'TicketController@destroy')->middleware('permission:delete ticket');
-Route::get('/tickets/{ticket}/edit', 'TicketController@edit')->middleware('auth');
+Route::get('/tickets/{ticket}/edit', 'TicketController@edit')->middleware('permission:edit ticket');
+
+
+Route::get('/customers', 'CustomerController@index')->middleware('auth');
+Route::get('/customer/{customer}', 'CustomerController@show')->middleware('auth');
+
+Route::get('/admin', 'AdminController@dashboard')->middleware('role:root|admin');

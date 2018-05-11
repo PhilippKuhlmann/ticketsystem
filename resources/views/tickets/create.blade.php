@@ -11,6 +11,16 @@
                     <div class="card-body">
 
                         <div class="form-group">
+                            <label for="customer">Customer</label>
+                            <select class="form-control" id="customer" name="customer_id">
+                                <option value="">Select please ...</option>
+                                @foreach ($customers as $customer)
+                                    <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label for="title">Betreff</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="Betreff">
                         </div>
@@ -29,6 +39,7 @@
                                 @endforeach
                             </select>
                         </div>
+
 
                     </div>
                     <div class="card-footer">

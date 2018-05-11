@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Ticket;
+use App\Customer;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -26,8 +27,9 @@ class TicketController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        return view('tickets.create', compact('users'));
+        $users = User::role('user')->get();
+        $customers = Customer::all();
+        return view('tickets.create', compact('users', 'customers'));
     }
 
     /**
@@ -43,9 +45,10 @@ class TicketController extends Controller
             'body' => $request->body,
             'creator_id' => auth()->user()->id,
             'editor_id' => $request->editor_id,
+            'customer_id' => $request->customer_id,
         ]);
 
-        return redirect('tickets');
+        return redirect('/');
     }
 
     /**
@@ -83,7 +86,7 @@ class TicketController extends Controller
         $ticket->body       = $request->body;
         $ticket->save();
 
-        return redirect('tickets');
+        return redirect('/');
     }
 
     /**
@@ -96,6 +99,6 @@ class TicketController extends Controller
     {
         $ticket->delete();
 
-        return redirect('tickets');
+        return redirect('/');
     }
 }

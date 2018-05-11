@@ -34,8 +34,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li><a class="nav-link" href="/tickets">Tickets</a></li>
-                        <li><a class="nav-link" href="/tickets/create">Ticket erstellen</a></li>
+                        @can('see all tickers')
+                            <li><a class="nav-link" href="/tickets">Tickets</a></li>
+                        @endcan
+                        @can('create ticket')
+                            <li><a class="nav-link" href="/tickets/create">Ticket erstellen</a></li>
+                        @endcan
                         @role('root')
                             <li><a class="nav-link" href="/register">User anlegen</a></li>
                         @endrole
@@ -48,9 +52,12 @@
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
+                            @role('admin')
+                                <li><a class="nav-link" href="/admin">admin dashboard</i></a></li>
+                            @endrole
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->firstName . ' ' . Auth::user()->lastName }} <span class="caret"></span>
+                                    {{ Auth::user()->username }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

@@ -12,18 +12,21 @@
                     Editor:{{$ticket->editor->firstName . ' ' . $ticket->editor->lastName}}
                     <br>
                     Crator:{{$ticket->creator->firstName . ' ' . $ticket->creator->lastName}}
+                    <br>
+                    Customer:{{$ticket->customer->name}}<br>
+                    Customer:{{$ticket->customer->email}}
                 </div>
                 <div class="card-footer">
                     <div class="row">
                         <input type="button" class="btn btn-primary" value="Edit" onclick="location.href = '/tickets/{{$ticket->id}}/edit';">
 
-                        @role('root')
+                        @can('delete ticket')
                         <form action="/tickets/{{$ticket->id}}" method="post">
                             <input name="_method" type="hidden" value="delete">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
-                        @endrole
+                        @endcan
                     </div>
 
                 </div>
