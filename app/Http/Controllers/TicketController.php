@@ -18,6 +18,7 @@ class TicketController extends Controller
     public function index()
     {
         $tickets = Ticket::orderBy('created_at', 'DESC')->get();
+
         return view('tickets.index', compact('tickets'));
     }
 
@@ -31,6 +32,7 @@ class TicketController extends Controller
         $users = User::role('user')->get();
         $customers = Customer::all();
         $employees = Employee::all();
+
         return view('tickets.create', compact('users', 'customers', 'employees'));
     }
 
@@ -85,8 +87,8 @@ class TicketController extends Controller
      */
     public function update(Request $request, Ticket $ticket)
     {
-        $ticket->title       = $request->title;
-        $ticket->body       = $request->body;
+        $ticket->title = $request->title;
+        $ticket->body = $request->body;
         $ticket->save();
 
         return redirect('/');

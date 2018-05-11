@@ -1,16 +1,12 @@
 <?php
 
-use Illuminate\Database\Seeder;
-
-use Illuminate\Support\Facades\Hash;
-
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-
 use App\User;
 use App\Customer;
 use App\Employee;
-
+use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -42,7 +38,6 @@ class DatabaseSeeder extends Seeder
         $role = Role::create(['name' => 'user']);
         $role->givePermissionTo('create ticket', 'edit ticket', 'be editor');
 
-
         // create basic users
 
         $user = User::create([
@@ -50,7 +45,7 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'Admin',
             'username' => 'root',
             'email' => 'root@test.de',
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
         ]);
         $user->assignRole('root');
 
@@ -59,7 +54,7 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'Admin',
             'username' => 'admin',
             'email' => 'admin@test.de',
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
         ]);
         $user->assignRole('admin');
 
@@ -68,7 +63,7 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'One',
             'username' => 'userone',
             'email' => 'userone@test.de',
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
         ]);
         $user->assignRole('user');
 
@@ -77,10 +72,9 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'Two',
             'username' => 'usertwo',
             'email' => 'usertwo@test.de',
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
         ]);
         $user->assignRole('user');
-
 
         // create basic customers
         $customer = Customer::create([

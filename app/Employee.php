@@ -16,9 +16,9 @@ class Employee extends Model
     ];
 
     /**
-     *  Relationships
+     *  Relationships.
      */
-     public function customer()
+    public function customer()
     {
         return $this->belongsTo('App\Customer');
     }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Ticket;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -26,6 +25,7 @@ class DashboardController extends Controller
     {
         $ticketsToEdit = Ticket::where('editor_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
         $ticketsCreated = Ticket::where('creator_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+
         return view('dashboard.index', compact('ticketsToEdit', 'ticketsCreated'));
     }
 }
