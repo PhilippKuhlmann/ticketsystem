@@ -20,6 +20,16 @@
                             <textarea class="form-control" id="body" name="body" rows="5"></textarea>
                         </div>
 
+                        <div class="form-group">
+                            <label for="editor">Bearbeiter</label>
+                            <select class="form-control" id="editor" name="editor_id">
+                                <option value="">Select please ...</option>
+                                @foreach ($users as $user)
+                                    <option value="{{$user->id}}">{{$user->firstName . ' ' . $user->lastName}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-primary" type="submit">Erstllen</button>

@@ -33,6 +33,20 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     *  Relationships
+     */
+     public function createdTickets()
+     {
+         return $this->hasMany('App\Ticket', 'crator_id');
+     }
+
+     public function editTickets()
+     {
+         return $this->hasMany('App\Ticket', 'editor_id');
+     }
+
+
 
     public function verified()
     {

@@ -47,5 +47,25 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user->assignRole('root');
+
+        $user = User::create([
+            'firstName' => 'User',
+            'lastName' => 'One',
+            'username' => 'userone',
+            'email' => 'userone@test.de',
+            'password' => Hash::make('password')
+        ]);
+
+        $user->assignRole('user');
+
+        $user = User::create([
+            'firstName' => 'User',
+            'lastName' => 'Two',
+            'username' => 'usertwo',
+            'email' => 'usertwo@test.de',
+            'password' => Hash::make('password')
+        ]);
+
+        $user->assignRole('user');
     }
 }

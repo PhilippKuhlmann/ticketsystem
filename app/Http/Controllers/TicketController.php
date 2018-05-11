@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Ticket;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::orderBy('created_at', 'DESC')->get();
+        $tickets = Ticket::where('editor_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
         return view('tickets.index', compact('tickets'));
     }
 
@@ -25,7 +26,8 @@ class TicketController extends Controller
      */
     public function create()
     {
-        return view('tickets.create');
+        $users = User::all();
+        return view('tickets.create', compact('users'));
     }
 
     /**
@@ -39,6 +41,8 @@ class TicketController extends Controller
         Ticket::create([
             'title' => $request->title,
             'body' => $request->body,
+            'creator_id' => auth()->user()->id,
+            'editor_id' => $request->editor_id,
         ]);
 
         return redirect('tickets');

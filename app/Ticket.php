@@ -12,6 +12,19 @@ class Ticket extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'body',
+        'title', 'body', 'creator_id', 'editor_id',
     ];
+
+    /**
+     *  Relationships
+     */
+     public function creator()
+    {
+        return $this->belongsTo('App\User', 'creator_id');
+    }
+
+    public function editor()
+    {
+        return $this->belongsTo('App\User', 'editor_id');
+    }
 }

@@ -8,12 +8,16 @@
                 <div class="card-header">{{$ticket->title}}</div>
                 <div class="card-body">
                     {{$ticket->body}}
+                    <br>
+                    Editor:{{$ticket->editor->firstName . ' ' . $ticket->editor->lastName}}
+                    <br>
+                    Crator:{{$ticket->creator->firstName . ' ' . $ticket->creator->lastName}}
                 </div>
                 <div class="card-footer">
                     <div class="row">
                         <input type="button" class="btn btn-primary" value="Edit" onclick="location.href = '/tickets/{{$ticket->id}}/edit';">
 
-                        
+
                         <form action="/tickets/{{$ticket->id}}" method="post">
                             <input name="_method" type="hidden" value="delete">
                             {{ csrf_field() }}
