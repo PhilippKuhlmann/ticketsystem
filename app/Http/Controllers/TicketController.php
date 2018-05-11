@@ -15,7 +15,7 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::where('editor_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+        $tickets = Ticket::orderBy('created_at', 'DESC')->get();
         return view('tickets.index', compact('tickets'));
     }
 

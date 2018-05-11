@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Ticket;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $ticketsToEdit = Ticket::where('editor_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+        $ticketsCreated = Ticket::where('creator_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+        return view('dashboard.index', compact('ticketsToEdit', 'ticketsCreated'));
     }
 }

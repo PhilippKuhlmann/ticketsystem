@@ -11,14 +11,14 @@
 |
 */
 
-Route::get('/', 'TicketController@index')->middleware('auth');
+Route::get('/', 'DashboardController@index')->middleware('auth');
 
 Auth::routes();
 Route::get('/verify/{token}', 'VerifyController@verify')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/tickets', 'TicketController@index')->middleware('auth');
+Route::get('/tickets', 'TicketController@index')->middleware('role:root');
 Route::post('/tickets', 'TicketController@store')->middleware('permission:create ticket');
 Route::get('/tickets/create', 'TicketController@create')->middleware('auth');
 Route::get('/tickets/{ticket}', 'TicketController@show')->middleware('auth');

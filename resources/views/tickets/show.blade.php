@@ -17,12 +17,13 @@
                     <div class="row">
                         <input type="button" class="btn btn-primary" value="Edit" onclick="location.href = '/tickets/{{$ticket->id}}/edit';">
 
-
+                        @role('root')
                         <form action="/tickets/{{$ticket->id}}" method="post">
                             <input name="_method" type="hidden" value="delete">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                        @endrole
                     </div>
 
                 </div>
