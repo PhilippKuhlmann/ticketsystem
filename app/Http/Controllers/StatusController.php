@@ -15,6 +15,7 @@ class StatusController extends Controller
     public function index()
     {
         $statuses = Status::all();
+
         return view('status.index', compact('statuses'));
     }
 
@@ -37,6 +38,7 @@ class StatusController extends Controller
     public function store(Request $request)
     {
         Status::create(['name' => $request->status]);
+
         return redirect('/admin/status');
     }
 
@@ -49,6 +51,7 @@ class StatusController extends Controller
     public function show(Status $status)
     {
         $tickets = $status->tickets;
+
         return view('status.show', compact('tickets'));
     }
 

@@ -1,9 +1,9 @@
 <?php
 
 use App\User;
+use App\Status;
 use App\Customer;
 use App\Employee;
-use App\Status;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -78,7 +78,6 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'Mustermann',
             'email' => 'm.mustermann@test.de',
         ]);
-
 
         // create statuses
         $status = Status::create(['name' => 'offen']);
