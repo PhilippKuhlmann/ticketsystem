@@ -19,6 +19,7 @@ class CreateTicketsTable extends Migration
             $table->unsignedInteger('editor_id');
             $table->unsignedInteger('customer_id');
             $table->unsignedInteger('employee_id');
+            $table->unsignedInteger('status_id');
             $table->string('title');
             $table->text('body');
             $table->timestamps();
@@ -38,6 +39,10 @@ class CreateTicketsTable extends Migration
             $table->foreign('employee_id')
                 ->references('id')
                 ->on('employees');
+
+            $table->foreign('status_id')
+                ->references('id')
+                ->on('statuses');
         });
     }
 

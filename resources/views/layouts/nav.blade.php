@@ -17,8 +17,17 @@
                 @can('create ticket')
                     <li><a class="nav-link" href="/tickets/create">Ticket erstellen</a></li>
                 @endcan
-                @role('root')
-                    <li><a class="nav-link" href="/register">User anlegen</a></li>
+                @role('admin')
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            Admin
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/admin/status">Statuses</a>
+                            <a class="dropdown-item" href="/register">User anlegen</a>
+                        </div>
+                    </li>
                 @endrole
             </ul>
 

@@ -12,7 +12,7 @@ class Ticket extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'body', 'creator_id', 'editor_id', 'customer_id', 'employee_id',
+        'title', 'body', 'creator_id', 'editor_id', 'customer_id', 'employee_id', 'status_id',
     ];
 
     /**
@@ -36,5 +36,10 @@ class Ticket extends Model
     public function employee()
     {
         return $this->belongsTo('App\Employee');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo('App\Status');
     }
 }

@@ -5,9 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{$ticket->title}}</div>
+                <div class="card-header">#{{$ticket->id}} status: {{$ticket->status->name}}</div>
                 <div class="card-body">
-                    {{$ticket->body}}
+                    Subject: {{$ticket->title}} <br>
+                    Text:
+                    <p>{{$ticket->body}}</p>
                     <br>
                     Editor:{{$ticket->editor->firstName . ' ' . $ticket->editor->lastName}}
                     <br>

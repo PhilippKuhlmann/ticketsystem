@@ -6,6 +6,7 @@ use App\User;
 use App\Ticket;
 use App\Customer;
 use App\Employee;
+use App\Status;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -51,6 +52,7 @@ class TicketController extends Controller
             'editor_id' => $request->editor_id,
             'customer_id' => $request->customer_id,
             'employee_id' => $request->employee_id,
+            'status_id' => Status::where('name', 'offen')->first()->id,
         ]);
 
         return redirect('/');

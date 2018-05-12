@@ -31,4 +31,9 @@ Route::get('/customer/{customer}', 'CustomerController@show')->middleware('auth'
 
 Route::get('/employee/{employee}', 'EmployeeController@show')->middleware('auth');
 
-Route::get('/admin', 'AdminController@dashboard')->middleware('role:root|admin');
+Route::get('/admin', 'AdminController@dashboard')->middleware('role:admin');
+
+Route::get('/admin/status', 'StatusController@index')->middleware('role:admin');
+Route::post('/admin/status', 'StatusController@store')->middleware('role:admin');
+
+Route::get('/tickets/status/{status}', 'StatusController@show')->middleware('role:admin');

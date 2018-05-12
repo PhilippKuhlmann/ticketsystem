@@ -3,6 +3,7 @@
 use App\User;
 use App\Customer;
 use App\Employee;
+use App\Status;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -29,25 +30,13 @@ class DatabaseSeeder extends Seeder
 
         // create roles and assign created permissions
 
-        $role = Role::create(['name' => 'root']);
-        $role->givePermissionTo(Permission::all());
-
         $role = Role::create(['name' => 'admin']);
-        $role->givePermissionTo(['delete ticket', 'see all tickets']);
+        $role->givePermissionTo(Permission::all());
 
         $role = Role::create(['name' => 'user']);
         $role->givePermissionTo('create ticket', 'edit ticket', 'be editor');
 
         // create basic users
-
-        $user = User::create([
-            'firstName' => 'Super',
-            'lastName' => 'Admin',
-            'username' => 'root',
-            'email' => 'root@test.de',
-            'password' => Hash::make('password'),
-        ]);
-        $user->assignRole('root');
 
         $user = User::create([
             'firstName' => 'Admin',
@@ -89,5 +78,10 @@ class DatabaseSeeder extends Seeder
             'lastName' => 'Mustermann',
             'email' => 'm.mustermann@test.de',
         ]);
+
+
+        // create statuses
+        $status = Status::create(['name' => 'offen']);
+        $status = Status::create(['name' => 'geschlossen']);
     }
 }
