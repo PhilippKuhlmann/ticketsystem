@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Ticket;
-
 use Illuminate\Database\Eloquent\Model;
 
 class TicketFeed extends Model
@@ -24,5 +22,4 @@ class TicketFeed extends Model
     {
         return $this->belongsTo('App\Ticket');
     }
-
 }

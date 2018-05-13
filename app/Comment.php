@@ -16,7 +16,7 @@ class Comment extends Model
     ];
 
     /**
-     *  Relationships
+     *  Relationships.
      */
     public function commentable()
     {
