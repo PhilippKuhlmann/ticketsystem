@@ -2,6 +2,8 @@
 
 use App\User;
 use App\Status;
+use App\Priority;
+use App\Action;
 use App\Customer;
 use App\Employee;
 use Illuminate\Database\Seeder;
@@ -82,5 +84,13 @@ class DatabaseSeeder extends Seeder
         // create statuses
         $status = Status::create(['name' => 'offen']);
         $status = Status::create(['name' => 'geschlossen']);
+
+        //create priority
+        $priority = Priority::create(['name' => 'normal']);
+        $priority = Priority::create(['name' => 'hoch']);
+
+        //create priority
+        $action = Action::create(['name' => 'rück ruf']);
+        $action = Action::create(['name' => 'fernwartung']);
     }
 }

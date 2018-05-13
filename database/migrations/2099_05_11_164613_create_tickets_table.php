@@ -20,6 +20,8 @@ class CreateTicketsTable extends Migration
             $table->unsignedInteger('customer_id');
             $table->unsignedInteger('employee_id');
             $table->unsignedInteger('status_id');
+            $table->unsignedInteger('priority_id');
+            $table->unsignedInteger('action_id');
             $table->string('title');
             $table->text('body');
             $table->timestamps();
@@ -43,6 +45,14 @@ class CreateTicketsTable extends Migration
             $table->foreign('status_id')
                 ->references('id')
                 ->on('statuses');
+
+            $table->foreign('priority_id')
+                ->references('id')
+                ->on('priorities');
+
+            $table->foreign('action_id')
+                ->references('id')
+                ->on('actions');
         });
     }
 

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Status;
+use App\Priority;
+use App\Action;
 use App\Ticket;
 use App\Customer;
 use App\Employee;
+use App\TicketFeed;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -33,8 +36,10 @@ class TicketController extends Controller
         $users = User::role('user')->get();
         $customers = Customer::all();
         $employees = Employee::all();
+        $priorities = Priority::all();
+        $actions = Action::all();
 
-        return view('tickets.create', compact('users', 'customers', 'employees'));
+        return view('tickets.create', compact('users', 'customers', 'employees', 'priorities', 'actions'));
     }
 
     /**
@@ -53,6 +58,8 @@ class TicketController extends Controller
             'customer_id' => $request->customer_id,
             'employee_id' => $request->employee_id,
             'status_id' => Status::where('name', 'offen')->first()->id,
+            'priority_id' => $request->priority_id,
+            'action_id' => $request->action_id,
         ]);
 
         return redirect('/');
@@ -66,7 +73,9 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        return view('tickets.show', compact('ticket'));
+        $statuses = Status::all();
+
+        return view('tickets.show', compact('ticket', 'statuses'));
     }
 
     /**
@@ -107,5 +116,31 @@ class TicketController extends Controller
         $ticket->delete();
 
         return redirect('/');
+    }
+
+
+    public function updateStatus(Request $request, Ticket $ticket)
+    {
+        $ticket->status_id = $request->status_id;
+        $ticket->save();
+
+        $feed = 'Status update auf ' . $ticket->status->name;
+
+        TicketFeed::create([
+            'ticket_id' => $ticket->id,
+            'feed' => $feed,
+        ]);
+
+        return redirect('/tickets/' . $ticket->id);
+    }
+
+    public function addComment(Request $request, Ticket $ticket)
+    {
+        $ticket->comments()->create([
+            'body' => $request->comment,
+            'user_id' => auth()->user()->id,
+        ]);
+
+        return redirect('/tickets/' . $ticket->id);
     }
 }

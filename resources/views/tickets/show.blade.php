@@ -2,25 +2,36 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">#{{$ticket->id}} status: {{$ticket->status->name}}</div>
-                <div class="card-body">
-                    Subject: {{$ticket->title}} <br>
-                    Text:
-                    <p>{{$ticket->body}}</p>
-                    <br>
-                    Editor:{{$ticket->editor->firstName . ' ' . $ticket->editor->lastName}}
-                    <br>
-                    Crator:{{$ticket->creator->firstName . ' ' . $ticket->creator->lastName}}
-                    <br>
-                    Customer:<a href="/customer/{{$ticket->customer->id}}">{{$ticket->customer->name}}</a><br>
-                    Customer:{{$ticket->customer->email}}
 
-                    <br>
-                    Ansprechpartner:<a href="/employee/{{$ticket->employee->id}}">{{$ticket->employee->firstName}}</a><br>
-                    Ansprechpartner:{{$ticket->employee->email}}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Kunde</div>
+                        <div class="card-body">
+                            <b>{{$ticket->customer->name}}</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Ansprechpartner</div>
+                        <div class="card-body">
+                            <b>{{$ticket->employee->firstName}} {{$ticket->employee->lastName}}</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    #{{$ticket->id}}
+                </div>
+                <div class="card-body">
+                    <h4>{{$ticket->title}}</h4>
+
+                    <p>{{$ticket->body}}</p>
                 </div>
                 <div class="card-footer">
                     <div class="row">
@@ -37,8 +48,74 @@
 
                 </div>
             </div>
-            <a href="{{ url()->previous() }}" class="btn btn-default">Back</a>
+            <br>
+            <form action="/ticket/{{$ticket->id}}/add/comment" method="post">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label for="comment">Text</label>
+                    <textarea class="form-control" id="body" name="comment" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+            <br>
+            @foreach ($ticket->comments->sortByDesc('created_at') as $comment)
+                <div class="card">
+                    <div class="card-body">
+                        <p>{{$comment->body}}</p>
+                    </div>
+                    <div class="card-footer">
+                        Von: {{$comment->user->username}} vor: {{$comment->created_at->diffForHumans()}}
+                    </div>
+                </div>
+                <br>
+            @endforeach
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Info</div>
+                <div class="card-body">
+                    Status: {{$ticket->status->name}} <br>
+                    Priority: {{$ticket->priority->name}} <br>
+                    Action: {{$ticket->action->name}} <br>
+                    <hr>
+                    Editor:{{$ticket->editor->firstName . ' ' . $ticket->editor->lastName}} <br>
+                    Crator:{{$ticket->creator->firstName . ' ' . $ticket->creator->lastName}}
+                    <hr>
+                </div>
+            </div>
+            <form action="/ticket/{{$ticket->id}}/update/status" method="post">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" id="status" name="status_id" required>
+                        <option value="">Select please ...</option>
+                        @foreach ($statuses as $status)
+                            <option value="{{$status->id}}">{{$status->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">update</button>
+            </form>
+            <br>
+            @foreach ($ticket->ticketFeeds->sortByDesc('created_at') as $feed)
+                <div class="card">
+                    <div class="card-body">
+                        <p>{{$feed->feed}}</p>
+                    </div>
+                    <div class="card-footer">
+                        wann: {{$feed->created_at->diffForHumans()}}
+                    </div>
+                </div>
+                <br>
+            @endforeach
         </div>
     </div>
+
+
+
+
+
+
+
 </div>
 @endsection

@@ -12,7 +12,7 @@ class Ticket extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'body', 'creator_id', 'editor_id', 'customer_id', 'employee_id', 'status_id',
+        'title', 'body', 'creator_id', 'editor_id', 'customer_id', 'employee_id', 'status_id', 'priority_id', 'action_id',
     ];
 
     /**
@@ -41,5 +41,25 @@ class Ticket extends Model
     public function status()
     {
         return $this->belongsTo('App\Status');
+    }
+
+    public function priority()
+    {
+        return $this->belongsTo('App\Priority');
+    }
+
+    public function action()
+    {
+        return $this->belongsTo('App\Action');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable');
+    }
+
+    public function ticketFeeds()
+    {
+        return $this->hasMany('App\TicketFeed');
     }
 }
