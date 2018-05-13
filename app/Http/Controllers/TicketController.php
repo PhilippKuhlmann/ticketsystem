@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Status;
-use App\Priority;
 use App\Action;
+use App\Status;
 use App\Ticket;
 use App\Customer;
 use App\Employee;
+use App\Priority;
 use App\TicketFeed;
 use Illuminate\Http\Request;
 
@@ -118,20 +118,19 @@ class TicketController extends Controller
         return redirect('/');
     }
 
-
     public function updateStatus(Request $request, Ticket $ticket)
     {
         $ticket->status_id = $request->status_id;
         $ticket->save();
 
-        $feed = 'Status update auf ' . $ticket->status->name;
+        $feed = 'Status update auf '.$ticket->status->name;
 
         TicketFeed::create([
             'ticket_id' => $ticket->id,
             'feed' => $feed,
         ]);
 
-        return redirect('/tickets/' . $ticket->id);
+        return redirect('/tickets/'.$ticket->id);
     }
 
     public function addComment(Request $request, Ticket $ticket)
@@ -141,6 +140,6 @@ class TicketController extends Controller
             'user_id' => auth()->user()->id,
         ]);
 
-        return redirect('/tickets/' . $ticket->id);
+        return redirect('/tickets/'.$ticket->id);
     }
 }

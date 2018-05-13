@@ -1,11 +1,11 @@
 <?php
 
 use App\User;
-use App\Status;
-use App\Priority;
 use App\Action;
+use App\Status;
 use App\Customer;
 use App\Employee;
+use App\Priority;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
